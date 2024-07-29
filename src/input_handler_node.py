@@ -38,11 +38,11 @@ class InputHandler:
                 rc_signal[button_name] = result['value']
                 if button_name == "button":
                     self.next_view_service(result['value'])
-        try:
-            # self.change_view_service(button_name, result['value'])
-            print(rc_signal)
-        except rospy.ServiceException as e:
-                rospy.logerr("Service call failed: %s" % e)
+        # try:
+        #     # self.change_view_service(button_name, result['value'])
+        #     print(rc_signal)
+        # except rospy.ServiceException as e:
+        #         rospy.logerr("Service call failed: %s" % e)
 
     def process_signal(self, data, value):
         if data['type'] == 'digital':
