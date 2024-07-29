@@ -1,0 +1,27 @@
+{
+    "button": {
+      "type": "digital",
+      "channel": 13,
+      "off": 1044,
+      "on": 1944,
+      "publish_zeroes": false
+    },
+    "stickL": {
+      "type": "analog",
+      "channel": 14,
+      "center": 1392,
+      "threshold": 10,
+      "min": 1044,
+      "max": 1944,
+      "publish_zeroes": false
+    },
+    "stickR": {
+      "type": "analog",
+      "channel": 15,
+      "center": 1450,
+      "threshold": 50,
+      "min": 1044,
+      "max": 1944,
+      "publish_zeroes": false
+    }
+  }

@@ -1,0 +1,6 @@
+<launch>
+    <node pkg="input_handler" type="input_handler_node.py" name="input_handler_node" output="screen">
+        <param name="topic_name" value="/mavros/rc/in" />
+        <param name="config_path" value="$(find input_handler)/config/control.json" />
+    </node>
+</launch>
