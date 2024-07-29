@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.0.2)
-project(input_handler)
+project(rviz_rc_view)
 
 ## Compile as C++11, supported in ROS Kinetic and newer
 # add_compile_options(-std=c++11)
@@ -11,6 +11,8 @@ find_package(catkin REQUIRED COMPONENTS
   mavros_msgs
   rospy
   std_msgs
+  message_generation
+  view_controller_msgs
 )
 
 ## System dependencies are found with CMake's conventions
@@ -54,11 +56,11 @@ find_package(catkin REQUIRED COMPONENTS
 # )
 
 ## Generate services in the 'srv' folder
-# add_service_files(
-#   FILES
-#   Service1.srv
-#   Service2.srv
-# )
+add_service_files(
+  FILES
+  ChangeView.srv
+  NextView.srv
+)
 
 ## Generate actions in the 'action' folder
 # add_action_files(
@@ -68,10 +70,10 @@ find_package(catkin REQUIRED COMPONENTS
 # )
 
 ## Generate added messages and services with any dependencies listed here
-# generate_messages(
-#   DEPENDENCIES
-#   mavros_msgs#   std_msgs
-# )
+generate_messages(
+  DEPENDENCIES
+  std_msgs#   view_controller_msgs
+)
 
 ################################################
 ## Declare ROS dynamic reconfigure parameters ##
@@ -104,8 +106,8 @@ find_package(catkin REQUIRED COMPONENTS
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
 #  INCLUDE_DIRS include
-#  LIBRARIES input_handler
-#  CATKIN_DEPENDS mavros_msgs rospy std_msgs
+#  LIBRARIES view_changer
+#  CATKIN_DEPENDS rospy std_msgs view_controller_msgs
 #  DEPENDS system_lib
 )
 
@@ -123,6 +125,7 @@ include_directories(
 ## Declare a C++ library
 # add_library(${PROJECT_NAME}
 #   src/${PROJECT_NAME}/input_handler.cpp
+#   src/${PROJECT_NAME}/view_changer.cpp
 # )
 
 ## Add cmake target dependencies of the library
@@ -134,6 +137,7 @@ include_directories(
 ## With catkin_make all packages are built within a single CMake context
 ## The recommended prefix ensures that target names across packages don't collide
 # add_executable(${PROJECT_NAME}_node src/input_handler_node.cpp)
+# add_executable(${PROJECT_NAME}_node src/view_changer_node.cpp)
 
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
@@ -198,6 +202,7 @@ include_directories(
 
 ## Add gtest based cpp test target and link libraries
 # catkin_add_gtest(${PROJECT_NAME}-test test/test_input_handler.cpp)
+# catkin_add_gtest(${PROJECT_NAME}-test test/test_view_changer.cpp)
 # if(TARGET ${PROJECT_NAME}-test)
 #   target_link_libraries(${PROJECT_NAME}-test ${PROJECT_NAME})
 # endif()

@@ -1,0 +1,6 @@
+<launch>
+    <node pkg="rviz_rc_view" type="view_changer_node.py" name="view_changer_node" output="screen">
+        <param name="topic_name" value="/rviz/camera_placement" />
+        <param name="views_path" value="$(find rviz_rc_view)/config/views.json" />
+    </node>
+</launch>

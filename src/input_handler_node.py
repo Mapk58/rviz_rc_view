@@ -3,7 +3,7 @@
 import rospy
 import json
 from mavros_msgs.msg import RCIn
-from view_changer.srv import NextView  # Импортируйте правильный сервис
+from rviz_rc_view.srv import NextView  # Импортируйте правильный сервис
 
 HZ = 5
 
