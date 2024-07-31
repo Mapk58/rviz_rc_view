@@ -38,7 +38,7 @@ class RotationHandler:
             self.x += value
 
         if type == "y":
-            self.x += value
+            self.y += value
 
         if type == "zoom":
             r, dy, dz = RotationHandler.cartesian_to_spherical(self.x, self.y, self.z)
