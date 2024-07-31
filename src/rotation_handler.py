@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 import rospy
-from math import sqrt, atan, sin, cos
+from math import sqrt, atan2, sin, cos
 import json
 from view_controller_msgs.msg import CameraPlacement
 from geometry_msgs.msg import PointStamped, Point, Vector3Stamped, Vector3
@@ -40,23 +40,25 @@ class RotationHandler:
         if type == "y":
             self.x += value
 
-        if self.channel_a == "zoom":
-            r, dy, dz = self.cartesian_to_spherical(self.x, self.y, self.z)
+        if type == "zoom":
+            r, dy, dz = RotationHandler.cartesian_to_spherical(self.x, self.y, self.z)
             r += value
-            self.x, self.y, self.z = self.spherical_to_cartesian(r, dy, dz)
+            self.x, self.y, self.z = RotationHandler.spherical_to_cartesian(r, dy, dz)
 
-        if self.channel_a == "pitch":
-            r, dy, dz = self.cartesian_to_spherical(self.x + self.focus_x, self.y + self.focus_y, self.z + self.focus_z)
+        if type == "pitch":
+            r, dy, dz = RotationHandler.cartesian_to_spherical(self.x + self.focus_x, self.y + self.focus_y, self.z + self.focus_z)
             dz += value
-            self.x, self.y, self.z = self.spherical_to_cartesian(r, dy, dz)
+            self.x, self.y, self.z = RotationHandler.spherical_to_cartesian(r, dy, dz)
             self.x -= self.focus_x
             self.y -= self.focus_y
             self.z -= self.focus_z
 
-        if self.channel_a == "yaw":
-            r, dy, dz = self.cartesian_to_spherical(self.x + self.focus_x, self.y + self.focus_y, self.z + self.focus_z)
-            dz += value
-            self.x, self.y, self.z = self.spherical_to_cartesian(r, dy, dz)
+        if type == "yaw":
+            r, dy, dz = RotationHandler.cartesian_to_spherical(self.x + self.focus_x, self.y + self.focus_y, self.z + self.focus_z)
+            dy += value
+            if dy <= 0.1415 or dy >= 3:
+                dy -= value
+            self.x, self.y, self.z = RotationHandler.spherical_to_cartesian(r, dy, dz)
             self.x -= self.focus_x
             self.y -= self.focus_y
             self.z -= self.focus_z
@@ -67,7 +69,7 @@ class RotationHandler:
 
         msg.target_frame = placement["target_frame"]
         duration = 1/self.hz
-        if duration_one_frame:
+        if not duration_one_frame:
             duration = self.current_config_defaults["camera_placement"]["transition_time"]
         msg.time_from_start = rospy.Duration(duration)
         msg.eye = PointStamped(header=Header(frame_id=placement["eye_frame_id"]), point=Point(self.x, self.y, self.z))
@@ -77,7 +79,7 @@ class RotationHandler:
         
     def publish_results(self, duration_one_frame = True):
         topic_name = self.topic_name
-        pub = rospy.Publisher(topic_name, CameraPlacement, queue_size=10)
+        pub = rospy.Publisher(topic_name, CameraPlacement, queue_size=1)
 
         msg = self.camera_placement_creator(duration_one_frame = True)
         
@@ -119,8 +121,8 @@ class RotationHandler:
 
     def cartesian_to_spherical(x, y, z):
         r = sqrt(x*x+y*y+z*z)
-        dy = atan(sqrt(x*x+y*y)/z)
-        dz = atan(y/x)
+        dy = atan2(sqrt(x*x+y*y), z)
+        dz = atan2(y, x)
         return r, dy, dz
     
     def reset_view(self):

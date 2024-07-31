@@ -1,0 +1,4 @@
+float32 channel_a
+float32 channel_b
+---
+bool success

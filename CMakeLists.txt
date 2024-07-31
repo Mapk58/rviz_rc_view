@@ -60,6 +60,7 @@ add_service_files(
   FILES
   ChangeView.srv
   NextView.srv
+  RotateView.srv
 )
 
 ## Generate actions in the 'action' folder

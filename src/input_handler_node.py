@@ -3,7 +3,7 @@
 import rospy
 import json
 from mavros_msgs.msg import RCIn
-from rviz_rc_view.srv import NextView  # Импортируйте правильный сервис
+from rviz_rc_view.srv import NextView, RotateView  # Импортируйте правильный сервис
 
 HZ = 5
 
@@ -38,11 +38,11 @@ class InputHandler:
                 rc_signal[button_name] = result['value']
                 if button_name == "button":
                     self.next_view_service(result['value'])
-        # try:
-        #     # self.change_view_service(button_name, result['value'])
-        #     print(rc_signal)
-        # except rospy.ServiceException as e:
-        #         rospy.logerr("Service call failed: %s" % e)
+        try:
+            # print(rc_signal)
+            self.rotate_view_service(rc_signal)
+        except rospy.ServiceException as e:
+                rospy.logerr("Service call failed: %s" % e)
 
     def process_signal(self, data, value):
         if data['type'] == 'digital':
@@ -83,6 +83,15 @@ class InputHandler:
             next_view(True)
         else:
             next_view(False)
+
+    def rotate_view_service(self, rc_signal):
+        lstick = rc_signal.get("stickL", 0.0)
+        rstick = rc_signal.get("stickR", 0.0)
+        if lstick == 0.0 and rstick == 0.0:
+            return
+        
+        rotate_view = rospy.ServiceProxy('rotate_view', RotateView)
+        rotate_view(lstick, rstick)
 
 if __name__ == '__main__':
     try:

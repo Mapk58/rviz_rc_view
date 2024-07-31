@@ -2,10 +2,11 @@
 
 import rospy
 import json
+import sched, time
 from view_controller_msgs.msg import CameraPlacement
 from geometry_msgs.msg import PointStamped, Point, Vector3Stamped, Vector3
 from std_msgs.msg import String, Header
-from rviz_rc_view.srv import ChangeView, ChangeViewResponse, NextView, NextViewResponse
+from rviz_rc_view.srv import ChangeView, ChangeViewResponse, NextView, NextViewResponse, RotateView, RotateViewResponse
 from rotation_handler import RotationHandler
 from input_handler_node import HZ
 
@@ -28,7 +29,7 @@ views = []
 #             return msg
 #     return None
 
-def handle_change_view(req):
+def handle_change_view(req): 
     rospy.loginfo("Received request to change view to: %s" % req.view_name)
     succ = rotationHandler.change_view(req.view_name, duration_one_frame=False)
     
@@ -65,18 +66,41 @@ def handle_next_view(req):
         return NextViewResponse(True)
     else:
         return NextViewResponse(False)
+    
+def handle_rotate_view(req):
+    global rotationHandler
+    res = rotationHandler.rotate(req.channel_a, req.channel_b)
+    if res:
+        return RotateViewResponse(True)
+    else:
+        return RotateViewResponse(False)
+    
+# --------------------------------
+def init_view(event):
+    rotationHandler.change_view("3rd Person", duration_one_frame=False)
 
-def view_changer_server():
+def stop_timer(event):
+    global rospyTimer
+    rospyTimer.shutdown()
+# --------------------------------
+
+def view_changer_server():  
     rospy.init_node('view_changer_server')
     _ = rospy.Service('change_view', ChangeView, handle_change_view)
     _ = rospy.Service('next_view', NextView, handle_next_view)
+    _ = rospy.Service('rotate_view', RotateView, handle_rotate_view)
     global views
     views = json.load(open(rospy.get_param('~views_path', 'views.json')))["views"]
     global rotationHandler
     rotationHandler = RotationHandler(HZ, views, rospy.get_param('~topic_name', '/rviz/camera_placement'))
-    rotationHandler.change_view("3rd Person", duration_one_frame=False)
     global curr_view_id
     curr_view_id = 1
+
+    # --------------------------------
+    global rospyTimer
+    rospyTimer = rospy.Timer(rospy.Duration(0.5), init_view)
+    rospy.Timer(rospy.Duration(1.1), stop_timer)
+    # --------------------------------
     rospy.loginfo("Ready to change view.")
     rospy.spin()
 
