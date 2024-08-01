@@ -36,9 +36,11 @@ class RotationHandler:
     def rotate_one_axis(self, type, value):
         if type == "x":
             self.x += value
+            self.focus_x += value
 
         if type == "y":
             self.y += value
+            self.focus_y += value
 
         if type == "zoom":
             r, dy, dz = RotationHandler.cartesian_to_spherical(self.x, self.y, self.z)
@@ -81,7 +83,7 @@ class RotationHandler:
         topic_name = self.topic_name
         pub = rospy.Publisher(topic_name, CameraPlacement, queue_size=1)
 
-        msg = self.camera_placement_creator(duration_one_frame = True)
+        msg = self.camera_placement_creator(duration_one_frame)
         
         if msg is not None:
             pub.publish(msg)
@@ -111,7 +113,7 @@ class RotationHandler:
                     if motion["some_system_data"] == "/mavros/control/channel_b":
                         self.channel_b = motion["motion_type"]
                         self.channel_b_speed = motion["motion_speed"]
-        return self.publish_results(duration_one_frame = True)
+        return self.publish_results(duration_one_frame)
 
     def spherical_to_cartesian(r, dy, dz):
         x = r * sin(dy) * cos(dz)

@@ -71,9 +71,11 @@ class InputHandler:
                 else:
                     return {'publish' : False} 
             if value > data['center']:
-                return {'publish' : True, 'value' : (value - (data['center'] + data['threshold']))/(data['max'] - (data['center'] + data['threshold']))}
+                # return {'publish' : True, 'value' : (value - (data['center'] + data['threshold']))/(data['max'] - (data['center'] + data['threshold']))}
+                return {'publish' : True, 'value' : (value - (data['center']))/(data['max'] - (data['center']))}
             if value < data['center']:
-                return {'publish' : True, 'value' : (value - (data['center'] - data['threshold']))/(- data['min'] + (data['center'] - data['threshold']))}
+                # return {'publish' : True, 'value' : (value - (data['center'] - data['threshold']))/(- data['min'] + (data['center'] - data['threshold']))}
+                return {'publish' : True, 'value' : (value - (data['center']))/(- data['min'] + (data['center']))}
         else:
             return {'publish' : False}
 

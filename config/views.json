@@ -3,85 +3,85 @@
     {
       "name": "FPV",
       "camera_placement": {
-        "target_frame": "base_link",
+        "target_frame": "body",
         "transition_time": 2.0,
-        "eye_frame_id": "base_link",
+        "eye_frame_id": "body",
         "eye_point": [0.5, 0.0, 0.5],
-        "focus_frame_id": "base_link",
+        "focus_frame_id": "body",
         "focus_point": [1.0, 0.0, 0.5],
-        "up_frame_id": "map"
+        "up_frame_id": "camera_init"
       },
       "control": [
         {
           "some_system_data": "/mavros/control/channel_a",
           "motion_type": "yaw",
-          "motion_speed": 1.2
+          "motion_speed": 0.6
         },
         {
           "some_system_data": "/mavros/control/channel_b",
           "motion_type": "pitch",
-          "motion_speed": 1.2
+          "motion_speed": 0.6
         }
       ]
     },
     {
       "name": "3rd Person",
       "camera_placement": {
-        "target_frame": "base_link",
+        "target_frame": "body",
         "transition_time": 2.0,
-        "eye_frame_id": "base_link",
-        "eye_point": [-5.0, 0.0, 5.0],
-        "focus_frame_id": "base_link",
-        "focus_point": [0.0, 0.0, 2.0],
-        "up_frame_id": "map"
+        "eye_frame_id": "body",
+        "eye_point": [-2.5, 0.0, 2.5],
+        "focus_frame_id": "body",
+        "focus_point": [0.0, 0.0, 1.0],
+        "up_frame_id": "camera_init"
       },
       "control": [
         {
           "some_system_data": "/mavros/control/channel_a",
           "motion_type": "yaw",
-          "motion_speed": 1.2
+          "motion_speed": 0.6
         },
         {
           "some_system_data": "/mavros/control/channel_b",
           "motion_type": "pitch",
-          "motion_speed": 1.2
+          "motion_speed": 0.6
         }
       ]
     },
     {
       "name": "3rd Person Further",
       "camera_placement": {
-        "target_frame": "base_link",
+        "target_frame": "body",
         "transition_time": 2.0,
-        "eye_frame_id": "base_link",
-        "eye_point": [-10.0, 0.0, 7.5],
-        "focus_frame_id": "base_link",
-        "focus_point": [0.0, 0.0, 3.0],
-        "up_frame_id": "map"
+        "eye_frame_id": "body",
+        "eye_point": [-5.0, 0.0, 3.75],
+        "focus_frame_id": "body",
+        "focus_point": [0.0, 0.0, 1.5],
+        "up_frame_id": "camera_init"
       },
       "control": [
         {
           "some_system_data": "/mavros/control/channel_a",
           "motion_type": "yaw",
-          "motion_speed": 1.2
+          "motion_speed": 0.6
         },
         {
           "some_system_data": "/mavros/control/channel_b",
           "motion_type": "pitch",
-          "motion_speed": 1.2
+          "motion_speed": 0.6
         }
       ]
     },
     {
       "name": "Bird View",
       "camera_placement": {
-        "target_frame": "base_link",
+        "target_frame": "body",
         "transition_time": 2.0,
-        "eye_frame_id": "base_link",
+        "eye_frame_id": "body",
         "eye_point": [0.0, -0.1, 20.0],
-        "focus_frame_id": "base_link",
+        "focus_frame_id": "body",
         "focus_point": [0.0, 0.0, 0.0],
-        "up_frame_id": "map"
+        "up_frame_id": "camera_init"
       },
       "control": [
         {
@@ -92,20 +92,20 @@
         {
           "some_system_data": "/mavros/control/channel_b",
           "motion_type": "pitch",
-          "motion_speed": 1.2
+          "motion_speed": 0.6
         }
       ]
     },
     {
       "name": "Map View",
       "camera_placement": {
-        "target_frame": "map",
+        "target_frame": "camera_init",
         "transition_time": 2.0,
-        "eye_frame_id": "base_link",
-        "eye_point": [0.0, -0.1, 20.0],
-        "focus_frame_id": "base_link",
+        "eye_frame_id": "camera_init",
+        "eye_point": [-2.0, 0.0, 20.0],
+        "focus_frame_id": "camera_init",
         "focus_point": [0.0, 0.0, 0.0],
-        "up_frame_id": "map"
+        "up_frame_id": "camera_init"
       },
       "control": [
         {

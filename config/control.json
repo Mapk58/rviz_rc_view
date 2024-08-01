@@ -10,7 +10,7 @@
       "type": "analog",
       "channel": 14,
       "center": 1392,
-      "threshold": 10,
+      "threshold": 30,
       "min": 1044,
       "max": 1944,
       "publish_zeroes": false
@@ -19,7 +19,7 @@
       "type": "analog",
       "channel": 15,
       "center": 1450,
-      "threshold": 50,
+      "threshold": 30,
       "min": 1044,
       "max": 1944,
       "publish_zeroes": false
