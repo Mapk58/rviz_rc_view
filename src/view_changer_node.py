@@ -77,7 +77,7 @@ def handle_rotate_view(req):
     
 # --------------------------------
 def init_view(event):
-    rotationHandler.change_view("3rd Person Further", duration_one_frame=False)
+    rotationHandler.change_view("Map View", duration_one_frame=False)
 
 def stop_timer(event):
     global rospyTimer
@@ -94,7 +94,7 @@ def view_changer_server():
     global rotationHandler
     rotationHandler = RotationHandler(HZ, views, rospy.get_param('~topic_name', '/rviz/camera_placement'))
     global curr_view_id
-    curr_view_id = 2
+    curr_view_id = 4
 
     # --------------------------------
     global rospyTimer

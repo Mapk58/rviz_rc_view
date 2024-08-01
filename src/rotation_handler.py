@@ -6,6 +6,7 @@ import json
 from view_controller_msgs.msg import CameraPlacement
 from geometry_msgs.msg import PointStamped, Point, Vector3Stamped, Vector3
 from std_msgs.msg import String, Header
+import tf
 
 class RotationHandler:
 
@@ -113,6 +114,19 @@ class RotationHandler:
                     if motion["some_system_data"] == "/mavros/control/channel_b":
                         self.channel_b = motion["motion_type"]
                         self.channel_b_speed = motion["motion_speed"]
+
+        if view_name == "Map View":
+            listener = tf.TransformListener()
+            listener.waitForTransform("/camera_init", "/body", rospy.Time(), rospy.Duration(0.05))
+            (trans, _) = listener.lookupTransform('/camera_init', '/body', rospy.Time(0))
+            print(trans)
+            self.x += trans[0]
+            self.y += trans[1]
+            self.z += trans[2]
+            self.focus_x += trans[0]
+            self.focus_y += trans[1]
+            self.focus_z += trans[2]
+
         return self.publish_results(duration_one_frame)
 
     def spherical_to_cartesian(r, dy, dz):

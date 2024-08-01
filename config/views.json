@@ -102,7 +102,7 @@
         "target_frame": "camera_init",
         "transition_time": 2.0,
         "eye_frame_id": "camera_init",
-        "eye_point": [-2.0, 0.0, 20.0],
+        "eye_point": [-0.1, 0.0, 20.0],
         "focus_frame_id": "camera_init",
         "focus_point": [0.0, 0.0, 0.0],
         "up_frame_id": "camera_init"
