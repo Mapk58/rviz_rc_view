@@ -117,8 +117,8 @@ class RotationHandler:
 
         if view_name == "Map View":
             listener = tf.TransformListener()
-            listener.waitForTransform("/camera_init", "/body", rospy.Time(), rospy.Duration(0.05))
-            (trans, _) = listener.lookupTransform('/camera_init', '/body', rospy.Time(0))
+            listener.waitForTransform("/map", "/base_link", rospy.Time(), rospy.Duration(0.05))
+            (trans, _) = listener.lookupTransform('/map', '/base_link', rospy.Time(0))
             self.x += trans[0]
             self.y += trans[1]
             self.z += trans[2]

@@ -1,16 +1,16 @@
 {
-  "init_view": "3rd Person",
+  "init_view": "Map View",
   "views": [
     {
       "name": "FPV",
       "camera_placement": {
-        "target_frame": "body",
+        "target_frame": "base_link",
         "transition_time": 2.0,
-        "eye_frame_id": "body",
+        "eye_frame_id": "base_link",
         "eye_point": [0.5, 0.0, 0.5],
-        "focus_frame_id": "body",
+        "focus_frame_id": "base_link",
         "focus_point": [1.0, 0.0, 0.5],
-        "up_frame_id": "body",
+        "up_frame_id": "base_link",
         "__comment__": [
           "up_frame_id defines the frame in which you want the up vector be in",
           "the final frame of the animation.",
@@ -34,13 +34,13 @@
     {
       "name": "3rd Person",
       "camera_placement": {
-        "target_frame": "body",
+        "target_frame": "base_link",
         "transition_time": 2.0,
-        "eye_frame_id": "body",
+        "eye_frame_id": "base_link",
         "eye_point": [-2.5, 0.0, 2.5],
-        "focus_frame_id": "body",
+        "focus_frame_id": "base_link",
         "focus_point": [0.0, 0.0, 1.0],
-        "up_frame_id": "body",
+        "up_frame_id": "base_link",
         "__comment__": [
           "up_frame_id defines the frame in which you want the up vector be in",
           "the final frame of the animation.",
@@ -64,13 +64,13 @@
     {
       "name": "3rd Person Further",
       "camera_placement": {
-        "target_frame": "body",
+        "target_frame": "base_link",
         "transition_time": 2.0,
-        "eye_frame_id": "body",
+        "eye_frame_id": "base_link",
         "eye_point": [-5.0, 0.0, 3.75],
-        "focus_frame_id": "body",
+        "focus_frame_id": "base_link",
         "focus_point": [0.0, 0.0, 1.5],
-        "up_frame_id": "body",
+        "up_frame_id": "base_link",
         "__comment__": [
           "up_frame_id defines the frame in which you want the up vector be in",
           "the final frame of the animation.",
@@ -94,13 +94,13 @@
     {
       "name": "Bird View",
       "camera_placement": {
-        "target_frame": "body",
+        "target_frame": "base_link",
         "transition_time": 2.0,
-        "eye_frame_id": "body",
-        "eye_point": [0.0, -0.1, 20.0],
-        "focus_frame_id": "body",
+        "eye_frame_id": "base_link",
+        "eye_point": [0.0, -1.0, 20.0],
+        "focus_frame_id": "base_link",
         "focus_point": [0.0, 0.0, 0.0],
-        "up_frame_id": "body",
+        "up_frame_id": "base_link",
         "__comment__": [
           "up_frame_id defines the frame in which you want the up vector be in",
           "the final frame of the animation.",
@@ -124,13 +124,13 @@
     {
       "name": "Map View",
       "camera_placement": {
-        "target_frame": "camera_init",
+        "target_frame": "map",
         "transition_time": 2.0,
-        "eye_frame_id": "camera_init",
+        "eye_frame_id": "map",
         "eye_point": [-0.1, 0.0, 20.0],
-        "focus_frame_id": "camera_init",
+        "focus_frame_id": "map",
         "focus_point": [0.0, 0.0, 0.0],
-        "up_frame_id": "camera_init",
+        "up_frame_id": "map",
         "__comment__": [
           "up_frame_id defines the frame in which you want the up vector be in",
           "the final frame of the animation.",
