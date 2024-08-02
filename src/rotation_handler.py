@@ -119,7 +119,6 @@ class RotationHandler:
             listener = tf.TransformListener()
             listener.waitForTransform("/camera_init", "/body", rospy.Time(), rospy.Duration(0.05))
             (trans, _) = listener.lookupTransform('/camera_init', '/body', rospy.Time(0))
-            print(trans)
             self.x += trans[0]
             self.y += trans[1]
             self.z += trans[2]

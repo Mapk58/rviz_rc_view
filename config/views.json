@@ -1,4 +1,5 @@
 {
+  "init_view": "3rd Person",
   "views": [
     {
       "name": "FPV",
@@ -9,7 +10,13 @@
         "eye_point": [0.5, 0.0, 0.5],
         "focus_frame_id": "body",
         "focus_point": [1.0, 0.0, 0.5],
-        "up_frame_id": "camera_init"
+        "up_frame_id": "body",
+        "__comment__": [
+          "up_frame_id defines the frame in which you want the up vector be in",
+          "the final frame of the animation.",
+          "This does not imply, that it will remain the same in the up_frame_id",
+          "frame for ever. It will remain the same in the target_frame frame."
+        ]
       },
       "control": [
         {
@@ -33,7 +40,13 @@
         "eye_point": [-2.5, 0.0, 2.5],
         "focus_frame_id": "body",
         "focus_point": [0.0, 0.0, 1.0],
-        "up_frame_id": "camera_init"
+        "up_frame_id": "body",
+        "__comment__": [
+          "up_frame_id defines the frame in which you want the up vector be in",
+          "the final frame of the animation.",
+          "This does not imply, that it will remain the same in the up_frame_id",
+          "frame for ever. It will remain the same in the target_frame frame."
+        ]
       },
       "control": [
         {
@@ -57,7 +70,13 @@
         "eye_point": [-5.0, 0.0, 3.75],
         "focus_frame_id": "body",
         "focus_point": [0.0, 0.0, 1.5],
-        "up_frame_id": "camera_init"
+        "up_frame_id": "body",
+        "__comment__": [
+          "up_frame_id defines the frame in which you want the up vector be in",
+          "the final frame of the animation.",
+          "This does not imply, that it will remain the same in the up_frame_id",
+          "frame for ever. It will remain the same in the target_frame frame."
+        ]
       },
       "control": [
         {
@@ -81,7 +100,13 @@
         "eye_point": [0.0, -0.1, 20.0],
         "focus_frame_id": "body",
         "focus_point": [0.0, 0.0, 0.0],
-        "up_frame_id": "camera_init"
+        "up_frame_id": "body",
+        "__comment__": [
+          "up_frame_id defines the frame in which you want the up vector be in",
+          "the final frame of the animation.",
+          "This does not imply, that it will remain the same in the up_frame_id",
+          "frame for ever. It will remain the same in the target_frame frame."
+        ]
       },
       "control": [
         {
@@ -105,7 +130,13 @@
         "eye_point": [-0.1, 0.0, 20.0],
         "focus_frame_id": "camera_init",
         "focus_point": [0.0, 0.0, 0.0],
-        "up_frame_id": "camera_init"
+        "up_frame_id": "camera_init",
+        "__comment__": [
+          "up_frame_id defines the frame in which you want the up vector be in",
+          "the final frame of the animation.",
+          "This does not imply, that it will remain the same in the up_frame_id",
+          "frame for ever. It will remain the same in the target_frame frame."
+        ]
       },
       "control": [
         {

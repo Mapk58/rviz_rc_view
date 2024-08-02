@@ -10,6 +10,7 @@ from rviz_rc_view.srv import ChangeView, ChangeViewResponse, NextView, NextViewR
 from rotation_handler import RotationHandler
 from input_handler_node import HZ
 
+curr_view_name = None
 curr_view_id = -1
 views = []
 
@@ -77,7 +78,8 @@ def handle_rotate_view(req):
     
 # --------------------------------
 def init_view(event):
-    rotationHandler.change_view("Map View", duration_one_frame=False)
+    global curr_view_name
+    rotationHandler.change_view(curr_view_name, duration_one_frame=False)
 
 def stop_timer(event):
     global rospyTimer
@@ -89,12 +91,17 @@ def view_changer_server():
     _ = rospy.Service('change_view', ChangeView, handle_change_view)
     _ = rospy.Service('next_view', NextView, handle_next_view)
     _ = rospy.Service('rotate_view', RotateView, handle_rotate_view)
+    views_json = json.load(open(rospy.get_param('~views_path', 'views.json')))
     global views
-    views = json.load(open(rospy.get_param('~views_path', 'views.json')))["views"]
+    views = views_json["views"]
     global rotationHandler
     rotationHandler = RotationHandler(HZ, views, rospy.get_param('~topic_name', '/rviz/camera_placement'))
+    global curr_view_name
     global curr_view_id
-    curr_view_id = 4
+    curr_view_name = views_json["init_view"]
+    for view_id, view in enumerate(views):
+        if view["name"] == curr_view_name:
+            curr_view_id = view_id
 
     # --------------------------------
     global rospyTimer
