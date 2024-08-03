@@ -1,6 +1,6 @@
 {
-  "tf_target_frame": "/camera_init",
-  "tf_source_frame": "/body",
+  "tf_target_frame": "/map",
+  "tf_source_frame": "/base_link",
   "init_view": "3rd Person",
   "views": [
     {
