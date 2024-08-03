@@ -18,7 +18,9 @@ class RotationHandler:
         self.focus_x = 0
         self.focus_y = 0
         self.focus_z = 0
-        self.config = config
+        self.config = config["views"]
+        self.tf_target_frame = config["tf_target_frame"]
+        self.tf_source_frame = config["tf_source_frame"]
         self.topic_name = topic_name
         self.current_config_defaults = self.config[0]
         self.view_name = "Map View"
@@ -117,14 +119,17 @@ class RotationHandler:
 
         if view_name == "Map View":
             listener = tf.TransformListener()
-            listener.waitForTransform("/camera_init", "/body", rospy.Time(), rospy.Duration(0.05))
-            (trans, _) = listener.lookupTransform('/camera_init', '/body', rospy.Time(0))
-            self.x += trans[0]
-            self.y += trans[1]
-            self.z += trans[2]
-            self.focus_x += trans[0]
-            self.focus_y += trans[1]
-            self.focus_z += trans[2]
+            try:
+                listener.waitForTransform(self.tf_target_frame, self.tf_source_frame, rospy.Time(), rospy.Duration(0.05))
+                (trans, _) = listener.lookupTransform(self.tf_target_frame, self.tf_source_frame, rospy.Time(0))
+                self.x += trans[0]
+                self.y += trans[1]
+                self.z += trans[2]
+                self.focus_x += trans[0]
+                self.focus_y += trans[1]
+                self.focus_z += trans[2]
+            except Exception as _:
+                pass
 
         return self.publish_results(duration_one_frame)
 

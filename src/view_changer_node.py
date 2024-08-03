@@ -95,7 +95,7 @@ def view_changer_server():
     global views
     views = views_json["views"]
     global rotationHandler
-    rotationHandler = RotationHandler(HZ, views, rospy.get_param('~topic_name', '/rviz/camera_placement'))
+    rotationHandler = RotationHandler(HZ, views_json, rospy.get_param('~topic_name', '/rviz/camera_placement'))
     global curr_view_name
     global curr_view_id
     curr_view_name = views_json["init_view"]

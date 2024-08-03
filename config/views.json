@@ -1,4 +1,6 @@
 {
+  "tf_target_frame": "/camera_init",
+  "tf_source_frame": "/body",
   "init_view": "3rd Person",
   "views": [
     {
